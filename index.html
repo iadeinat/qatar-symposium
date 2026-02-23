@@ -20,7 +20,11 @@
     --text-mid: #444444;
     --text-light: #777777;
   }
-
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
@@ -29,6 +33,8 @@
     background: var(--white);
     color: var(--text);
     overflow-x: hidden;
+    min-width: 100%;
+    width: 100%;
   }
 
   /* ── QUILT TEXTURE (replicates the diagonal crosshatch from brand materials) ── */
