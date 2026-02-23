@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qatar Industry Symposium 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cmu-red: #C41230;
+    --cmu-red-dark: #9B0E26;
+    --quilt: #111111;
+    --white: #FFFFFF;
+    --off-white: #F8F6F3;
+    --light-gray: #F0EDEA;
+    --mid-gray: #E2DDD8;
+    --text: #1A1A1A;
+    --text-mid: #444444;
+    --text-light: #777777;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── QUILT TEXTURE (replicates the diagonal crosshatch from brand materials) ── */
+  .quilt {
+    background-color: var(--quilt);
+    background-image:
+      repeating-linear-gradient(45deg,  rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 1px, transparent 1px, transparent 10px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 1px, transparent 1px, transparent 10px),
+      repeating-linear-gradient(45deg,  rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 5px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 5px);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 2px solid var(--cmu-red);
+    box-shadow: 0 1px 12px rgba(0,0,0,0.08);
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 60px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 1rem; }
+  .nav-red-bar { width: 3px; height: 28px; background: var(--cmu-red); flex-shrink: 0; }
+  .nav-brand-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text); line-height: 1.3;
+  }
+  .nav-brand-text span { color: var(--text-light); display: block; font-weight: 300; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mid);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cmu-red); }
+  .nav-cta { background: var(--cmu-red) !important; color: var(--white) !important; padding: 0.5rem 1.2rem; }
+  .nav-cta:hover { background: var(--cmu-red-dark) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Quilt border strips on left and right */
+  .hero-quilt-left {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: 48px; z-index: 2;
+  }
+  .hero-quilt-right {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 48px; z-index: 2;
+  }
+  .hero-quilt-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 48px; z-index: 2;
+  }
+
+  .hero-campus {
+    position: absolute; inset: 0;
+    background-image: url('campus.png');
+    background-size: cover;
+    background-position: center 40%;
+    z-index: 0;
+  }
+  .hero-gradient {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,0.15) 0%,
+        transparent 25%,
+        transparent 45%,
+        rgba(255,255,255,0.7) 70%,
+        rgba(255,255,255,0.97) 88%,
+        var(--white) 100%
+      ),
+      linear-gradient(90deg,
+        rgba(255,255,255,0.5) 0%,
+        transparent 45%
+      );
+  }
+
+  .hero-content {
+    position: relative; z-index: 3;
+    flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 6rem 5rem;
+    max-width: 1280px; margin: 0 auto; width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+    font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--cmu-red); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0; animation: fade-up 0.7s ease 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: inline-block; width: 28px; height: 2px; background: var(--cmu-red);
+  }
+
+  .hero-title {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    font-weight: 300; line-height: 1.0;
+    color: var(--text); letter-spacing: -0.01em;
+    opacity: 0; animation: fade-up 0.8s ease 0.5s forwards;
+    max-width: 800px;
+  }
+
+  .hero-red-rule {
+    width: 100px; height: 3px; background: var(--cmu-red);
+    margin: 1.8rem 0;
+    opacity: 0; animation: fade-up 0.7s ease 0.65s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'EB Garamond', serif; font-style: italic;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    color: var(--text-mid); max-width: 560px; line-height: 1.5;
+    opacity: 0; animation: fade-up 0.8s ease 0.75s forwards;
+  }
+
+  .hero-meta-row {
+    display: flex; gap: 3rem; margin-top: 2.5rem; flex-wrap: wrap;
+    opacity: 0; animation: fade-up 0.8s ease 0.9s forwards;
+  }
+  .hero-meta-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--cmu-red); margin-bottom: 0.25rem;
+  }
+  .hero-meta-value { font-size: 0.9rem; color: var(--text); font-weight: 400; }
+
+  .hero-cta {
+    margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fade-up 0.8s ease 1.05s forwards;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BUTTONS ── */
+  .btn-red {
+    display: inline-block; padding: 0.85rem 2.5rem;
+    background: var(--cmu-red); color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+    font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s, transform 0.2s;
+    border: 1px solid var(--cmu-red);
+  }
+  .btn-red:hover { background: var(--cmu-red-dark); transform: translateY(-1px); }
+
+  .btn-outline {
+    display: inline-block; padding: 0.85rem 2.5rem;
+    background: transparent; color: var(--text);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+    font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; border: 1px solid rgba(0,0,0,0.25);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--text); transform: translateY(-1px); }
+
+  /* ── QUILT BANNER (partners bar) ── */
+  .quilt-banner {
+    display: flex; align-items: stretch;
+    overflow: hidden;
+  }
+  .quilt-banner-side {
+    width: 48px; flex-shrink: 0;
+  }
+  .quilt-banner-center {
+    flex: 1;
+    background: var(--off-white);
+    border-top: 1px solid var(--mid-gray);
+    border-bottom: 1px solid var(--mid-gray);
+    display: flex; align-items: center; justify-content: center;
+    gap: 2rem; flex-wrap: wrap;
+    padding: 1rem 3rem;
+  }
+  .pb-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-light);
+  }
+  .pb-name { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--text); }
+  .pb-sep { width: 1px; height: 20px; background: var(--mid-gray); }
+  .pb-note { font-family: 'Barlow Condensed', sans-serif; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); }
+
+  /* ── SECTION WRAP ── */
+  /* Each section has quilt strips on sides */
+  .section-outer {
+    display: flex; align-items: stretch;
+  }
+  .section-quilt-side {
+    width: 48px; flex-shrink: 0;
+  }
+  .section-inner {
+    flex: 1; padding: 6rem 4rem;
+  }
+  .section-inner.bg-white { background: var(--white); }
+  .section-inner.bg-off-white { background: var(--off-white); }
+  .section-inner.bg-light { background: var(--light-gray); }
+  .section-inner.bg-dark {
+    background: #1A1A1A; color: var(--white);
+  }
+
+  .content-wrap { max-width: 1100px; margin: 0 auto; }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--cmu-red);
+    margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem;
+  }
+  .section-label::before {
+    content: ''; display: inline-block; width: 18px; height: 2px; background: var(--cmu-red);
+  }
+  .section-heading {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.15;
+    color: var(--text);
+  }
+  .section-heading.light { color: var(--white); }
+  .section-heading em {
+    font-family: 'EB Garamond', serif; font-style: italic; font-weight: 400; color: var(--cmu-red);
+  }
+  .section-heading.light em { color: #EE8898; }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; align-items: start;
+  }
+  .about-text p {
+    font-size: 1rem; line-height: 1.85; color: var(--text-mid); margin-bottom: 1.3rem; font-weight: 300;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .obj-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-light); margin-bottom: 1.2rem;
+  }
+  .obj-list { list-style: none; }
+  .obj-list li {
+    padding: 1.2rem 0; border-bottom: 1px solid var(--mid-gray);
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    font-size: 0.95rem; line-height: 1.6; color: var(--text-mid); font-weight: 300;
+  }
+  .obj-list li:first-child { border-top: 1px solid var(--mid-gray); }
+  .obj-num {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
+    color: var(--cmu-red); letter-spacing: 0.1em; flex-shrink: 0; padding-top: 0.1rem;
+  }
+
+  /* ── RED DIVIDER ── */
+  .red-stripe {
+    height: 4px; background: var(--cmu-red);
+  }
+
+  /* ── THEMES ── */
+  .themes-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--mid-gray); margin-top: 3rem;
+  }
+  .theme-card {
+    padding: 2.2rem 1.8rem; border-right: 1px solid var(--mid-gray);
+    position: relative; overflow: hidden; transition: background 0.25s;
+  }
+  .theme-card:last-child { border-right: none; }
+  .theme-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--cmu-red); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .theme-card:hover { background: var(--light-gray); }
+  .theme-card:hover::before { transform: scaleX(1); }
+  .theme-num {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.2em; color: var(--cmu-red); margin-bottom: 1.2rem;
+  }
+  .theme-title { font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 0.7rem; line-height: 1.3; }
+  .theme-body { font-size: 0.82rem; line-height: 1.65; color: var(--text-mid); font-weight: 300; }
+
+  /* ── PROGRAM ── */
+  .program-date-bar { display: flex; align-items: center; gap: 1.5rem; margin: 3rem 0 1.5rem; }
+  .pdb-date { font-family: 'EB Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-mid); white-space: nowrap; }
+  .pdb-line { flex: 1; height: 1px; background: var(--mid-gray); }
+
+  .tl-item { display: grid; grid-template-columns: 85px 1px 1fr; gap: 0 2rem; }
+  .tl-time {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.67rem;
+    color: var(--text-light); text-align: right; padding: 1.7rem 0; letter-spacing: 0.05em; line-height: 1.3;
+  }
+  .tl-spine { display: flex; flex-direction: column; align-items: center; padding-top: 2rem; }
+  .tl-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--mid-gray);
+    flex-shrink: 0; border: 2px solid var(--white); z-index: 1;
+  }
+  .tl-dot.red { background: var(--cmu-red); border-color: var(--off-white); width: 10px; height: 10px; }
+  .tl-line { flex: 1; width: 1px; background: var(--mid-gray); }
+  .tl-item:last-child .tl-line { display: none; }
+  .tl-content { padding: 1.4rem 0; border-bottom: 1px solid var(--light-gray); }
+  .tl-item:last-child .tl-content { border-bottom: none; }
+  .tl-tag {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--cmu-red); margin-bottom: 0.3rem;
+  }
+  .tl-event { font-size: 1rem; font-weight: 500; color: var(--text); line-height: 1.3; margin-bottom: 0.35rem; }
+  .tl-desc { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+
+  .panel-box {
+    margin-top: 1rem; border: 1px solid var(--mid-gray); padding: 1.4rem 1.5rem;
+    background: var(--white); position: relative;
+  }
+  .panel-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--cmu-red); }
+  .pb-section-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.4rem;
+  }
+  .pb-moderator { font-size: 0.85rem; color: var(--text); margin-bottom: 1rem; font-style: italic; }
+  .pb-panelists { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  .pb-panelist { font-size: 0.8rem; color: var(--text-mid); line-height: 1.4; font-weight: 300; }
+  .pb-panelist strong { display: block; color: var(--text); font-weight: 500; font-size: 0.82rem; }
+
+  /* ── SPEAKERS ── */
+  .speakers-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--mid-gray);
+    border: 1px solid var(--mid-gray); margin-top: 3rem;
+  }
+  .spk-card { background: var(--white); padding: 1.8rem; transition: background 0.2s; }
+  .spk-card:hover { background: var(--off-white); }
+  .spk-panel-tag {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--cmu-red);
+    margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .spk-panel-tag::before { content: ''; display: inline-block; width: 8px; height: 1px; background: var(--cmu-red); }
+  .spk-name { font-size: 0.92rem; font-weight: 500; color: var(--text); line-height: 1.3; margin-bottom: 0.25rem; }
+  .spk-title { font-size: 0.78rem; color: var(--text-mid); line-height: 1.5; font-weight: 300; }
+
+  /* ── REGISTER (dark quilt section) ── */
+  .register-outer {
+    display: flex; align-items: stretch; position: relative;
+  }
+  .register-inner {
+    flex: 1; padding: 7rem 4rem; text-align: center;
+    position: relative;
+  }
+  .register-inner .section-label { justify-content: center; }
+  .register-inner .section-label::before { display: none; }
+  .register-title {
+    font-family: 'Barlow', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 300; color: var(--white); margin-bottom: 0.5rem; line-height: 1.1;
+  }
+  .register-rule { width: 60px; height: 2px; background: var(--cmu-red); margin: 1.8rem auto; }
+  .register-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.05rem; color: #AAAAAA; margin-bottom: 2.5rem; }
+  .btn-cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-red-outline {
+    display: inline-block; padding: 0.85rem 2.5rem;
+    background: transparent; color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+    font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-red-outline:hover { border-color: var(--white); transform: translateY(-1px); }
+  .register-note {
+    margin-top: 1.5rem; font-size: 0.72rem; color: #666;
+    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  /* ── FOOTER ── */
+  .footer-red-line { height: 3px; background: var(--cmu-red); }
+  footer {
+    background: var(--off-white); border-top: 1px solid var(--mid-gray);
+    padding: 2.5rem 5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;
+  }
+  .footer-brand { font-size: 1rem; font-weight: 300; color: var(--text); margin-bottom: 0.2rem; }
+  .footer-brand strong { font-weight: 500; }
+  .footer-tagline { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.85rem; color: var(--text-light); }
+  .footer-right { font-family: 'Barlow Condensed', sans-serif; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); text-align: right; line-height: 2; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .nav-links { display: none; }
+    .section-quilt-side { width: 18px; }
+    .hero-quilt-left, .hero-quilt-right { width: 18px; }
+    .section-inner { padding: 5rem 2rem; }
+    .hero-content { padding: 0 3rem 5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .themes-grid { grid-template-columns: 1fr 1fr; }
+    .theme-card:nth-child(2) { border-right: none; }
+    .speakers-grid { grid-template-columns: 1fr 1fr; }
+    .pb-panelists { grid-template-columns: 1fr; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+    .footer-right { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-red-bar"></div>
+      <div class="nav-brand-text">
+        Qatar Industry Symposium
+        <span>Carnegie Mellon University Qatar</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#register" class="nav-cta">Register</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-quilt-left quilt"></div>
+  <div class="hero-quilt-right quilt"></div>
+  <div class="hero-quilt-top quilt"></div>
+  <div class="hero-campus"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Carnegie Mellon University in Qatar &nbsp;·&nbsp; April 21, 2026</div>
+    <h1 class="hero-title">Qatar Industry<br>Symposium</h1>
+    <div class="hero-red-rule"></div>
+    <p class="hero-subtitle">Forging Partnerships for Industrial Excellence</p>
+    <div class="hero-meta-row">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Date</div>
+        <div class="hero-meta-value">Tuesday, April 21, 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Time</div>
+        <div class="hero-meta-value">9:00 a.m. – 1:00 p.m.</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Venue</div>
+        <div class="hero-meta-value">Carnegie Mellon University in Qatar</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#register" class="btn-red">Register Now</a>
+      <a href="#program" class="btn-outline">View Program</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS BAR -->
+<div class="quilt-banner">
+  <div class="quilt-banner-side quilt"></div>
+  <div class="quilt-banner-center">
+    <span class="pb-label">Hosted by</span>
+    <span class="pb-name">Carnegie Mellon University in Qatar</span>
+    <div class="pb-sep"></div>
+    <span class="pb-label">In partnership with</span>
+    <span class="pb-name">Milaha</span>
+    <div class="pb-sep"></div>
+    <span class="pb-note">All are welcome · Limited seating</span>
+  </div>
+  <div class="quilt-banner-side quilt"></div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-outer" id="about">
+  <div class="section-quilt-side quilt"></div>
+  <div class="section-inner bg-white">
+    <div class="content-wrap">
+      <div class="reveal">
+        <div class="section-label">About the Symposium</div>
+        <h2 class="section-heading">A National Dialogue on Qatar's <em>Industrial Future</em></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>The Qatar Industry Symposium brings together policymakers, industry leaders and academics for a national dialogue on Qatar's industrial future. Anchored in <strong>Qatar National Vision 2030</strong>, the symposium creates a high-level platform to discuss industrial innovation, sustainability, and public–private collaboration as drivers of long-term economic growth.</p>
+          <p>The symposium serves as the culminating event of the <strong>Inside Qatar's Industry</strong> series — an experiential learning initiative that connects CMU-Q students with leading Qatari manufacturing and logistics organizations, bridging classroom knowledge with real-world industrial practice.</p>
+        </div>
+        <div class="reveal">
+          <div class="obj-label">Symposium Objectives</div>
+          <ul class="obj-list">
+            <li><span class="obj-num">01</span>Foster dialogue between industry leaders, policymakers, faculty, and students</li>
+            <li><span class="obj-num">02</span>Explore innovation, sustainability, and digital transformation in Qatar's industrial ecosystem</li>
+            <li><span class="obj-num">03</span>Strengthen industry–academia collaboration through applied research and talent development</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-quilt-side quilt"></div>
+</div>
+
+<div class="red-stripe"></div>
+
+<!-- THEMES -->
+<div class="section-outer" id="themes">
+  <div class="section-quilt-side quilt"></div>
+  <div class="section-inner bg-off-white">
+    <div class="content-wrap">
+      <div class="reveal">
+        <div class="section-label">Key Themes</div>
+        <h2 class="section-heading">Four Pillars of Industrial <em>Transformation</em></h2>
+      </div>
+      <div class="themes-grid reveal">
+        <div class="theme-card">
+          <div class="theme-num">01 / Industrial Innovation</div>
+          <div class="theme-title">The Future of Advanced Manufacturing</div>
+          <p class="theme-body">Exploring cutting-edge processes, technologies, and strategic investments reshaping Qatar's manufacturing sector and its regional position.</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-num">02 / Sustainability</div>
+          <div class="theme-title">Responsible Industrial Operations</div>
+          <p class="theme-body">Integrating circular economy principles, carbon management, and environmental stewardship into Qatar's long-term industrial strategy.</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-num">03 / Smart Logistics</div>
+          <div class="theme-title">Digital Transformation & Resilience</div>
+          <p class="theme-body">AI-powered logistics networks, last-mile connectivity, and building supply chain resilience across Qatar and the GCC region.</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-num">04 / Public–Private Partnerships</div>
+          <div class="theme-title">Collaboration Across Sectors</div>
+          <p class="theme-body">Building institutional frameworks for talent development, shared innovation, and sustainable economic diversification.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-quilt-side quilt"></div>
+</div>
+
+<!-- PROGRAM -->
+<div class="section-outer" id="program">
+  <div class="section-quilt-side quilt"></div>
+  <div class="section-inner bg-white">
+    <div class="content-wrap">
+      <div class="reveal">
+        <div class="section-label">Symposium Program</div>
+        <h2 class="section-heading">Tuesday, April 21, 2026</h2>
+      </div>
+      <div class="program-date-bar reveal">
+        <span class="pdb-date">Carnegie Mellon University in Qatar &nbsp;·&nbsp; 9:00 a.m. – 1:00 p.m.</span>
+        <div class="pdb-line"></div>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item reveal">
+          <div class="tl-time">08:30<br>09:00</div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Pre-Event</div>
+            <div class="tl-event">Registration, Welcome Coffee & Industry Immersion</div>
+            <div class="tl-desc">Guest registration and networking. Curated video and photo reel highlighting <em>Inside Qatar's Industry</em> site visits and student engagement.</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">09:00<br>09:10</div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Opening</div>
+            <div class="tl-event">Opening & Framing the Symposium</div>
+            <div class="tl-desc">Welcome and Opening Remarks — <strong>Prof. Iman Adeinat</strong>, Carnegie Mellon University in Qatar</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">09:10<br>10:00</div>
+          <div class="tl-spine"><div class="tl-dot red"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Panel 1</div>
+            <div class="tl-event">Qatar's Vision for Industry, Innovation, and Talent</div>
+            <div class="panel-box">
+              <div class="pb-section-label">Moderator</div>
+              <div class="pb-moderator">Prof. Michael Trick, Dean — Carnegie Mellon University in Qatar</div>
+              <div class="pb-section-label">Panelists</div>
+              <div class="pb-panelists">
+                <div class="pb-panelist"><strong>Mr. Abdulrahman Hesham Al Sowaidi</strong>CEO, Qatar Development Bank</div>
+                <div class="pb-panelist"><strong>H.E. Saleh Majid Al-Khulaifi</strong>Undersecretary for Industry & Business Development, MOCI</div>
+                <div class="pb-panelist"><strong>Mr. Fahad Bin Saad Al-Qahtani</strong>CEO, Milaha</div>
+                <div class="pb-panelist"><strong>Mr. Hamad Al Naimi</strong>Chief Strategy Officer, Invest Qatar</div>
+                <div class="pb-panelist"><strong>Mr. Omar Al Ansari</strong>Secretary General, QRDI</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">10:00<br>10:15</div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Break</div>
+            <div class="tl-event">Coffee Break & Networking</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">10:20<br>11:20</div>
+          <div class="tl-spine"><div class="tl-dot red"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Panel 2</div>
+            <div class="tl-event">Innovation and Sustainability in Manufacturing</div>
+            <div class="panel-box">
+              <div class="pb-section-label">Moderator</div>
+              <div class="pb-moderator">Prof. Jennifer Bruder, Associate Dean for Research — Carnegie Mellon University in Qatar</div>
+              <div class="pb-section-label">Panelists</div>
+              <div class="pb-panelists">
+                <div class="pb-panelist"><strong>Eng. Ali Al Kuwari</strong>CEO, Msheireb Properties</div>
+                <div class="pb-panelist"><strong>Dr. Soud Al Thani</strong>Director, Climate Change & Carbon Management, Earthna</div>
+                <div class="pb-panelist"><strong>Industry Representative</strong>Milaha</div>
+                <div class="pb-panelist"><strong>Prof. Chadi Aoun</strong>Area Head, Information Systems, CMU-Q</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">11:20<br>12:00</div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Break</div>
+            <div class="tl-event">Coffee Break, Networking & Prayer Time</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">12:00<br>12:50</div>
+          <div class="tl-spine"><div class="tl-dot red"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Panel 3</div>
+            <div class="tl-event">Smart Logistics and Supply Chain Transformation</div>
+            <div class="panel-box">
+              <div class="pb-section-label">Moderator</div>
+              <div class="pb-moderator">Prof. Khalid Harras, Senior Associate Dean — Carnegie Mellon University in Qatar</div>
+              <div class="pb-section-label">Panelists</div>
+              <div class="pb-panelists">
+                <div class="pb-panelist"><strong>Mr. Kris Brusselmans</strong>EVP, Maritime & Logistics, Milaha</div>
+                <div class="pb-panelist"><strong>Dr. Hamad Mejegheer</strong>Executive Director of SME Development, QDB</div>
+                <div class="pb-panelist"><strong>Ms. Eman Ahmed Al Kuwari</strong>Director, Digital Innovation Department, MCIT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">12:50<br>13:00</div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Closing</div>
+            <div class="tl-event">Closing Reflections & Next Steps</div>
+            <div class="tl-desc">Closing Remarks — <strong>Prof. Iman Adeinat</strong>, Carnegie Mellon University in Qatar</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-time">13:00<br>onward</div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-tag">Post-Event</div>
+            <div class="tl-event">Networking Lunch</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="section-quilt-side quilt"></div>
+</div>
+
+<div class="red-stripe"></div>
+
+<!-- SPEAKERS -->
+<div class="section-outer" id="speakers">
+  <div class="section-quilt-side quilt"></div>
+  <div class="section-inner bg-light">
+    <div class="content-wrap">
+      <div class="reveal">
+        <div class="section-label">Distinguished Speakers</div>
+        <h2 class="section-heading">Leaders, Policymakers <em>and Academics</em></h2>
+      </div>
+      <div class="speakers-grid reveal">
+        <div class="spk-card"><div class="spk-panel-tag">Panel 1 · Moderator</div><div class="spk-name">Prof. Michael Trick</div><div class="spk-title">Dean, Carnegie Mellon University in Qatar</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 1</div><div class="spk-name">Mr. Abdulrahman Hesham Al Sowaidi</div><div class="spk-title">CEO, Qatar Development Bank</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 1</div><div class="spk-name">H.E. Saleh Majid Al-Khulaifi</div><div class="spk-title">Undersecretary for Industry & Business Development, MOCI</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 1</div><div class="spk-name">Mr. Fahad Bin Saad Al-Qahtani</div><div class="spk-title">CEO, Milaha</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 1</div><div class="spk-name">Mr. Hamad Al Naimi</div><div class="spk-title">Chief Strategy Officer, Invest Qatar</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 1</div><div class="spk-name">Mr. Omar Al Ansari</div><div class="spk-title">Secretary General, QRDI</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 2 · Moderator</div><div class="spk-name">Prof. Jennifer Bruder</div><div class="spk-title">Associate Dean for Research, Carnegie Mellon University in Qatar</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 2</div><div class="spk-name">Eng. Ali Al Kuwari</div><div class="spk-title">CEO, Msheireb Properties</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 2</div><div class="spk-name">Dr. Soud Al Thani</div><div class="spk-title">Director, Climate Change & Carbon Management, Earthna</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 2</div><div class="spk-name">Prof. Chadi Aoun</div><div class="spk-title">Area Head, Information Systems, Carnegie Mellon University in Qatar</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 3 · Moderator</div><div class="spk-name">Prof. Khalid Harras</div><div class="spk-title">Senior Associate Dean, Carnegie Mellon University in Qatar</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 3</div><div class="spk-name">Mr. Kris Brusselmans</div><div class="spk-title">EVP, Maritime & Logistics, Milaha</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 3</div><div class="spk-name">Dr. Hamad Mejegheer</div><div class="spk-title">Executive Director of SME Development, Qatar Development Bank</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Panel 3</div><div class="spk-name">Ms. Eman Ahmed Al Kuwari</div><div class="spk-title">Director, Digital Innovation Department, MCIT</div></div>
+        <div class="spk-card"><div class="spk-panel-tag">Opening & Closing</div><div class="spk-name">Prof. Iman Adeinat</div><div class="spk-title">Faculty, Carnegie Mellon University in Qatar</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-quilt-side quilt"></div>
+</div>
+
+<!-- REGISTER -->
+<div class="register-outer" id="register">
+  <div class="section-quilt-side quilt"></div>
+  <div class="register-inner quilt">
+    <div class="content-wrap">
+      <div class="reveal">
+        <div class="section-label" style="justify-content:center;color:#EE8898;">
+          <span style="width:18px;height:2px;background:#EE8898;display:inline-block;margin-right:0.7rem;"></span>
+          Join Us
+        </div>
+        <div class="register-title">Reserve Your Place<br>at the Symposium</div>
+        <div class="register-rule"></div>
+        <p class="register-sub">Carnegie Mellon University in Qatar &nbsp;·&nbsp; Tuesday, April 21, 2026</p>
+        <div class="btn-cta-row">
+          <a href="https://forms.gle/hqL745jYM7Q7BtrVA" target="_blank" class="btn-red">Register to Attend</a>
+          <a href="#program" class="btn-red-outline">View Full Program</a>
+        </div>
+        <div class="register-note">All are welcome · Limited seating available</div>
+        <div style="margin-top:1.4rem;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:#888;">Questions? &nbsp;</span>
+          <a href="/cdn-cgi/l/email-protection#9aebfbeefbe8f3f4feefe9eee8e3e9e3f7eaf5e9f3eff7dafbf4fee8ffedb4f9f7efb4fffeef" style="font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.08em;color:#EE8898;text-decoration:none;border-bottom:1px solid rgba(238,136,152,0.4);"><span class="__cf_email__" data-cfemail="b8c9d9ccd9cad1d6dccdcbcccac1cbc1d5c8d7cbd1cdd5f8d9d6dccaddcf96dbd5cd96dddccd">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-quilt-side quilt"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-red-line"></div>
+<footer>
+  <div>
+    <div class="footer-brand">Qatar Industry <strong>Symposium</strong> 2026</div>
+    <div class="footer-tagline">Forging Partnerships for Industrial Excellence</div>
+  </div>
+  <div class="footer-right">
+    Carnegie Mellon University in Qatar<br>
+    In partnership with Milaha<br>
+    Education City, Doha, Qatar
+  </div>
+</footer>
+
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
